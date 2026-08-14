@@ -1,0 +1,53 @@
+/* Small post-launch refinements layered over the core app styles. */
+
+/* The category artwork is a wide banner, not an article photo. Show the whole
+   banner on compact demo cards instead of cropping the title/artwork. */
+.mini-story > img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  object-position: center;
+  background: var(--navy-950);
+  border-bottom: 1px solid var(--line);
+}
+
+/* When live RSS gives us real article photography, cards can opt into this
+   class for a conventional editorial crop while retaining category art as a fallback. */
+.mini-story.has-article-image > img,
+.article-image {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.settings-topic-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.settings-topic-control p {
+  margin: 0;
+  max-width: 620px;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+.settings-topic-control .secondary-button {
+  flex: 0 0 auto;
+}
+
+@media (min-width: 900px) {
+  .mini-story > img {
+    max-height: 92px;
+  }
+}
+
+@media (max-width: 620px) {
+  .settings-topic-control {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .settings-topic-control .secondary-button {
+    width: 100%;
+  }
+}
