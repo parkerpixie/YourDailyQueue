@@ -2,218 +2,242 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Your Daily Queue is a CapyQueue demo: a personalized daily briefing built around the news and information one person actually cares about.">
-  <meta name="theme-color" content="#173b45">
+  <meta name="theme-color" content="#07182d">
   <meta property="og:title" content="Your Daily Queue | CapyQueue Demo">
-  <meta property="og:description" content="The news you care about. None of the stuff you don't.">
+  <meta property="og:description" content="Curated stories. On your terms.">
   <title>Your Daily Queue | CapyQueue Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to today's queue</a>
+  <a class="skip-link" href="#app-main">Skip to content</a>
 
-  <div class="demo-ribbon">
-    <span>CAPYQUEUE DEMO</span>
-    <span class="demo-ribbon-copy">Fictional profile + sample briefing content</span>
+  <div class="app-shell">
+    <aside class="desktop-sidebar" aria-label="Primary navigation">
+      <a href="#" class="brand-lockup" data-view-link="today" aria-label="Your Daily Queue home">
+        <img src="App Icon Black with Yellow.png" alt="" class="brand-mark">
+        <span><small>Your</small><strong>Daily</strong><b>Queue</b></span>
+      </a>
+      <nav class="side-nav" id="desktop-nav"></nav>
+      <div class="sidebar-quill">
+        <img src="App Icon sand with Navy Owl.png" alt="" class="quill-mini">
+        <div><strong>Quill</strong><span>Wise. Curious. Unbiased.</span></div>
+      </div>
+      <p class="demo-chip">CapyQueue demo</p>
+    </aside>
+
+    <div class="app-column">
+      <header class="mobile-header">
+        <a href="#" class="mobile-brand" data-view-link="today" aria-label="Your Daily Queue home">
+          <img src="App Icon Black with Yellow.png" alt="">
+          <span>Your <strong>Daily Queue</strong></span>
+        </a>
+        <div class="header-actions">
+          <button class="icon-button" id="search-button" aria-label="Search the queue"><img src="20-search.svg" alt=""></button>
+          <button class="icon-button" id="notification-button" aria-label="Notifications"><img src="21-notifications-bell.svg" alt=""></button>
+        </div>
+      </header>
+
+      <main id="app-main" tabindex="-1">
+        <section class="view is-active" id="view-today" data-view="today" aria-labelledby="today-title">
+          <div class="view-inner today-view">
+            <div class="welcome-row">
+              <div>
+                <p class="eyebrow" id="today-date">Today</p>
+                <h1 id="today-title">Good morning, <span id="today-name">Alex</span>.</h1>
+                <p>Here’s what deserves your attention.</p>
+              </div>
+              <button class="location-pill" type="button" data-view-link="settings">
+                <img src="25-location-zip.svg" alt="">
+                <span id="today-location">Madison, WI</span>
+              </button>
+            </div>
+
+            <section class="weather-glance" id="weather-glance" aria-labelledby="weather-glance-title">
+              <div class="weather-glance-bg" id="weather-glance-bg"></div>
+              <div class="weather-glance-content">
+                <div class="weather-glance-top">
+                  <div>
+                    <p class="eyebrow">Weather</p>
+                    <h2 id="weather-glance-title"><span id="weather-temp">--°</span> <small id="weather-condition">Loading forecast…</small></h2>
+                    <p id="weather-quill-read">Quill is checking what your day is walking into.</p>
+                  </div>
+                  <button class="round-arrow" type="button" data-queue-topic="weather" aria-label="Open full weather">→</button>
+                </div>
+                <div class="weather-metrics" id="weather-mini-metrics">
+                  <span>Feels <strong>--°</strong></span>
+                  <span>Rain <strong>--%</strong></span>
+                  <span>Wind <strong>--</strong></span>
+                  <span>Air <strong>--</strong></span>
+                </div>
+              </div>
+            </section>
+
+            <section class="today-block" aria-labelledby="top-story-title">
+              <div class="section-row">
+                <div><p class="eyebrow">Start here</p><h2 id="top-story-title">Top Story</h2></div>
+                <button class="text-button" type="button" data-view-link="queue">My Queue →</button>
+              </div>
+              <div id="top-story-card"></div>
+            </section>
+
+            <section class="today-block" aria-labelledby="quick-scan-title">
+              <div class="section-row">
+                <div><p class="eyebrow">One-minute overview</p><h2 id="quick-scan-title">Quick Scan</h2></div>
+              </div>
+              <div class="quick-strip" id="quick-strip"></div>
+            </section>
+
+            <section class="today-block" aria-labelledby="more-for-you-title">
+              <div class="section-row">
+                <div><p class="eyebrow">Built around you</p><h2 id="more-for-you-title">More for You</h2></div>
+                <button class="text-button" type="button" data-view-link="topics">Edit topics</button>
+              </div>
+              <div class="story-scroller" id="more-for-you"></div>
+            </section>
+
+            <section class="quill-card">
+              <img src="Meet Quill.png" alt="Meet Quill, the Your Daily Queue owl guide">
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-queue" data-view="queue" aria-labelledby="queue-title">
+          <div class="view-inner">
+            <div class="page-heading">
+              <p class="eyebrow">Your briefing</p>
+              <h1 id="queue-title">My Queue</h1>
+              <p>Weather first. Then the topics you picked, in one place.</p>
+            </div>
+            <div class="queue-tabs-wrap">
+              <div class="queue-tabs" id="queue-tabs" role="tablist" aria-label="Queue sections"></div>
+            </div>
+            <div id="queue-panel"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-topics" data-view="topics" aria-labelledby="topics-title">
+          <div class="view-inner">
+            <div class="page-heading">
+              <p class="eyebrow">Make it yours</p>
+              <h1 id="topics-title">Choose Your Queue</h1>
+              <p>Pick the topics you care about. Your choices become the tabs in My Queue.</p>
+            </div>
+            <div class="topic-picker-grid" id="topic-picker-grid"></div>
+            <div class="sticky-save-bar">
+              <span id="topic-count">0 topics selected</span>
+              <button class="primary-button" id="save-topics" type="button">Save my queue</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-saved" data-view="saved" aria-labelledby="saved-title">
+          <div class="view-inner">
+            <div class="page-heading">
+              <p class="eyebrow">Read later</p>
+              <h1 id="saved-title">Saved</h1>
+              <p>For the stories you genuinely mean to come back to.</p>
+            </div>
+            <div id="saved-list" class="saved-list"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-settings" data-view="settings" aria-labelledby="settings-title">
+          <div class="view-inner settings-view">
+            <div class="page-heading">
+              <p class="eyebrow">Control room</p>
+              <h1 id="settings-title">Settings</h1>
+              <p>Tell the Queue how you like information delivered.</p>
+            </div>
+
+            <form class="settings-card" id="settings-form">
+              <div class="settings-section">
+                <div class="settings-section-head">
+                  <span class="settings-number">01</span>
+                  <div><h2>Profile</h2><p>This demo saves preferences only in this browser.</p></div>
+                </div>
+                <label class="field-label" for="reader-name">Your name</label>
+                <input class="field-input" id="reader-name" name="reader-name" maxlength="24" autocomplete="name">
+              </div>
+
+              <div class="settings-section">
+                <div class="settings-section-head">
+                  <span class="settings-number">02</span>
+                  <div><h2>Home base</h2><p>One location powers Weather and Local News.</p></div>
+                </div>
+                <label class="field-label" for="location-input">ZIP / postal code or city</label>
+                <div class="location-input-row">
+                  <input class="field-input" id="location-input" name="location-input" placeholder="53703 or Madison, WI" autocomplete="postal-code">
+                  <button class="secondary-button" id="use-location" type="button"><img src="25-location-zip.svg" alt=""> Use my location</button>
+                </div>
+                <p class="field-help" id="location-status">Enter a city or postal code. We’ll resolve it to the forecast location.</p>
+              </div>
+
+              <div class="settings-section">
+                <div class="settings-section-head">
+                  <span class="settings-number">03</span>
+                  <div><h2>Reading depth</h2><p>Same stories, different amount of context.</p></div>
+                </div>
+                <div class="depth-grid" id="depth-grid">
+                  <label class="depth-choice">
+                    <input type="radio" name="depth" value="quick">
+                    <img src="Quick Scan Personalization Icon.png" alt="">
+                    <span><strong>Quick Scan</strong><small>Headlines + the point.</small></span>
+                  </label>
+                  <label class="depth-choice">
+                    <input type="radio" name="depth" value="balanced">
+                    <img src="Balenced Personalization Icon.png" alt="">
+                    <span><strong>Balanced</strong><small>Enough context to understand why it matters.</small></span>
+                  </label>
+                  <label class="depth-choice">
+                    <input type="radio" name="depth" value="deep">
+                    <img src="Deep Dive Personalization Icon.png" alt="">
+                    <span><strong>Deep Dive</strong><small>More background, nuance, and what to watch next.</small></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="settings-section">
+                <div class="settings-section-head">
+                  <span class="settings-number">04</span>
+                  <div><h2>Temperature</h2><p>Use whichever scale makes your brain happiest.</p></div>
+                </div>
+                <div class="segmented">
+                  <label><input type="radio" name="units" value="fahrenheit"><span>°F</span></label>
+                  <label><input type="radio" name="units" value="celsius"><span>°C</span></label>
+                </div>
+              </div>
+
+              <div class="settings-actions">
+                <button class="secondary-button danger-lite" id="reset-demo" type="button">Reset demo</button>
+                <button class="primary-button" type="submit">Save settings</button>
+              </div>
+            </form>
+
+            <section class="settings-quill">
+              <img src="Meet Quill.png" alt="Meet Quill, your guide through the noise">
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <nav class="mobile-nav" id="mobile-nav" aria-label="Primary navigation"></nav>
+    </div>
   </div>
 
-  <header class="site-header" id="top">
-    <div class="header-inner">
-      <a class="site-brand" href="#top" aria-label="Your Daily Queue home">
-        <span class="brand-eyebrow">A personalized daily field guide</span>
-        <span class="brand-name">Your Daily Queue</span>
-      </a>
-
-      <div class="header-meta">
-        <p class="greeting">Good morning, <span id="profile-name">Alex</span>.</p>
-        <time class="report-date" id="report-date">Today's briefing</time>
-        <p class="profile-location" id="profile-location">Demo profile · Midwest</p>
+  <dialog class="search-dialog" id="search-dialog">
+    <form method="dialog" class="search-panel">
+      <div class="dialog-top">
+        <div><p class="eyebrow">Search</p><h2>Search Your Queue</h2></div>
+        <button value="cancel" class="icon-button close-dialog" aria-label="Close"><img src="28-close-x.svg" alt=""></button>
       </div>
-    </div>
-  </header>
-
-  <nav class="section-nav" aria-label="Briefing sections">
-    <div class="section-nav-inner" id="section-nav-inner">
-      <a href="#top-story">Start here</a>
-      <a href="#quick-scan">Quick scan</a>
-      <a href="#queue-sections">Your topics</a>
-      <a href="#why-this-exists">Why this exists</a>
-      <button class="nav-customize" id="open-customize" type="button">Customize my queue</button>
-    </div>
-  </nav>
-
-  <main id="main-content">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy">
-        <p class="hero-kicker">The news you care about. None of the stuff you don't.</p>
-        <h1 id="hero-title">Your day,<br><span>filtered on purpose.</span></h1>
-        <p class="hero-intro">A daily briefing shaped around one person's actual interests, attention, location, and preferred level of detail. No infinite feed required.</p>
-
-        <div class="hero-actions">
-          <a class="primary-button" href="#top-story">Open today's queue</a>
-          <button class="secondary-button" id="hero-customize" type="button">Change the demo profile</button>
-        </div>
-
-        <div class="queue-stats" aria-label="Today's briefing summary">
-          <div><strong id="stat-stories">9</strong><span>stories</span></div>
-          <div><strong id="stat-topics">6</strong><span>topics</span></div>
-          <div><strong id="stat-minutes">7</strong><span>minute read</span></div>
-        </div>
-      </div>
-
-      <div class="hero-art" aria-hidden="true">
-        <div class="orbit orbit-one"></div>
-        <div class="orbit orbit-two"></div>
-        <div class="hero-card hero-card-main">
-          <div class="capy-mark">
-            <svg viewBox="0 0 120 92" role="img" aria-label="Simple capybara illustration">
-              <path d="M24 55c0-21 16-37 40-37 12 0 23 4 31 12 7 7 10 16 10 26 0 15-11 25-28 25H51C34 81 24 71 24 55Z" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-              <path d="M39 23 31 9c10-2 17 2 21 11M80 22 90 9c7 5 8 12 5 19" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="75" cy="43" r="3.5" fill="currentColor"/>
-              <path d="M88 53c5 3 10 3 15 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <p>Today's Queue</p>
-          <strong>Only what earns your attention.</strong>
-          <div class="mini-chips">
-            <span>Science</span><span>AI</span><span>Wellbeing</span><span>Animals</span>
-          </div>
-        </div>
-        <div class="hero-card hero-card-small one"><span>MORE OF THIS</span><strong>Useful context</strong></div>
-        <div class="hero-card hero-card-small two"><span>LESS OF THIS</span><strong>Noise for noise's sake</strong></div>
-      </div>
-    </section>
-
-    <section class="weather-shell" aria-label="Sample personalized context">
-      <div class="weather-card">
-        <div class="weather-main">
-          <p class="section-kicker">Demo context</p>
-          <div class="weather-temp-row"><span class="weather-icon">☀</span><strong>72°</strong></div>
-          <p>Bright, breezy, low chance of rain.</p>
-        </div>
-        <div class="weather-vitals">
-          <div><span>High</span><strong>78°</strong></div>
-          <div><span>Low</span><strong>61°</strong></div>
-          <div><span>Rain</span><strong>10%</strong></div>
-          <div><span>Air</span><strong>Good</strong></div>
-        </div>
-        <aside class="weather-note">
-          <span>Why this is here</span>
-          <p>Useful information can sit beside news instead of living in six separate apps.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="report-section featured-section" id="top-story">
-      <div class="section-heading">
-        <p class="section-kicker">Start here</p>
-        <h2>The Big Story</h2>
-        <p>The one idea most worth carrying into the rest of the day.</p>
-      </div>
-
-      <article class="lead-story">
-        <div class="lead-visual" aria-hidden="true">
-          <span class="lead-number">01</span>
-          <div class="signal-lines"><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="lead-content">
-          <p class="story-label">Your Daily Queue · Editorial demo</p>
-          <h3>Your feed can be smaller and still be smarter.</h3>
-          <p class="story-summary">Most news products optimize for volume, recency, or engagement. A personalized briefing can optimize for something more useful: what this particular person needs to understand today.</p>
-          <details class="story-details">
-            <summary>Why this made the queue</summary>
-            <p>This demo puts context before quantity. The goal is not to show everything. It is to show enough, explain why it matters, and make it easy to move on.</p>
-          </details>
-          <div class="story-feedback" data-story="lead">
-            <button type="button" data-feedback="more">＋ More like this</button>
-            <button type="button" data-feedback="less">− Less like this</button>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <section class="report-section quick-scan-section" id="quick-scan">
-      <div class="section-heading compact">
-        <p class="section-kicker">One-minute overview</p>
-        <h2>Quick Scan</h2>
-        <p>Tap only what earns another thirty seconds.</p>
-      </div>
-      <div class="quick-scan-list" id="quick-scan-list"></div>
-    </section>
-
-    <section class="report-section topic-section" id="queue-sections">
-      <div class="section-heading">
-        <p class="section-kicker">Built around the person</p>
-        <h2>Your Topics</h2>
-        <p>These sections change when the demo profile changes. Preferences are saved in this browser so the queue remembers what mattered.</p>
-      </div>
-      <div id="topic-sections" class="topic-sections"></div>
-    </section>
-
-    <section class="report-section philosophy-section" id="why-this-exists">
-      <div class="philosophy-card">
-        <div>
-          <p class="section-kicker">A CapyQueue demonstration</p>
-          <h2>Build the information around the human.</h2>
-        </div>
-        <div class="philosophy-copy">
-          <p>Your Daily Queue is a public demo inspired by a real custom morning briefing. The content here is fictional and intentionally generic. The interaction is the point.</p>
-          <p>Choose the topics. Change the reading depth. Tell the queue what deserves more attention. The interface adapts instead of asking the person to adapt to another endless feed.</p>
-          <a href="https://capyqueue-company.netlify.app/" target="_blank" rel="noreferrer">See more from CapyQueue ↗</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div>
-        <strong>Your Daily Queue</strong>
-        <p>A CapyQueue demo built with fictional preferences and sample content.</p>
-      </div>
-      <a href="https://capyqueue-company.netlify.app/" target="_blank" rel="noreferrer">CapyQueue</a>
-    </div>
-  </footer>
-
-  <dialog class="customize-dialog" id="customize-dialog">
-    <form method="dialog" class="customize-panel" id="customize-form">
-      <div class="dialog-head">
-        <div>
-          <p class="section-kicker">Demo controls</p>
-          <h2>Customize Alex's queue</h2>
-          <p>Try changing what this fictional reader sees.</p>
-        </div>
-        <button class="dialog-close" value="cancel" aria-label="Close customization">×</button>
-      </div>
-
-      <div class="control-block">
-        <label for="reader-name">Reader name</label>
-        <input id="reader-name" name="reader-name" type="text" maxlength="24" value="Alex">
-      </div>
-
-      <div class="control-block">
-        <label>Reading depth</label>
-        <div class="segmented-control" role="group" aria-label="Reading depth">
-          <label><input type="radio" name="depth" value="quick"><span>Quick</span></label>
-          <label><input type="radio" name="depth" value="balanced" checked><span>Balanced</span></label>
-          <label><input type="radio" name="depth" value="deep"><span>Context-rich</span></label>
-        </div>
-      </div>
-
-      <fieldset class="topic-picker">
-        <legend>What belongs in this queue?</legend>
-        <div id="topic-picker-grid" class="topic-picker-grid"></div>
-      </fieldset>
-
-      <div class="dialog-actions">
-        <button type="button" class="reset-button" id="reset-preferences">Reset demo</button>
-        <button type="submit" class="save-button" value="save">Save my queue</button>
-      </div>
+      <input class="field-input" id="search-input" placeholder="Search stories or topics…" autofocus>
+      <div id="search-results" class="search-results"></div>
     </form>
   </dialog>
 
