@@ -1,0 +1,9 @@
+{
+  "name": "your-daily-queue",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A public CapyQueue demo showing a personalized daily intelligence briefing.",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}
