@@ -1,7 +1,7 @@
 import { copyFile, cp, mkdir, readdir, rm, stat } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
-const coreFiles = ['index.html', 'styles.css', 'app.js'];
+const coreFiles = ['index.html', 'styles.css', 'polish.css', 'app.js'];
 const assetExtensions = new Set(['.png', '.jpg', '.jpeg', '.webp', '.svg', '.gif', '.ico']);
 
 await rm('dist', { recursive: true, force: true });
