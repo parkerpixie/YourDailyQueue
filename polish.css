@@ -1,7 +1,7 @@
 /* Small post-launch refinements layered over the core app styles. */
 
-/* The category artwork is a wide banner, not an article photo. Show the whole
-   banner on compact demo cards instead of cropping the title/artwork. */
+/* Category artwork is a wide banner, not an article photo. Show the whole
+   fallback banner instead of chopping off its title/artwork. */
 .mini-story > img {
   width: 100%;
   height: auto;
@@ -12,12 +12,33 @@
   border-bottom: 1px solid var(--line);
 }
 
-/* When live RSS gives us real article photography, cards can opt into this
-   class for a conventional editorial crop while retaining category art as a fallback. */
+/* Live RSS photography gets a conventional editorial crop. */
 .mini-story.has-article-image > img,
 .article-image {
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+/* Full My Queue cards now use the actual story image when one exists, while
+   falling back gracefully to the category banner when the feed has no art. */
+.queue-story-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 1;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 0 14px;
+  border-radius: 13px;
+  border: 1px solid var(--line);
+  background: var(--navy-950);
+}
+.queue-story-image.has-article-image {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.story-source-link {
+  text-decoration: none;
 }
 
 .settings-topic-control {
@@ -39,6 +60,12 @@
 @media (min-width: 900px) {
   .mini-story > img {
     max-height: 92px;
+  }
+  .mini-story.has-article-image > img {
+    max-height: 128px;
+  }
+  .queue-story-image {
+    max-height: 210px;
   }
 }
 
