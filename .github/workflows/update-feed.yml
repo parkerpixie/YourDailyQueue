@@ -47,6 +47,12 @@ jobs:
       - name: Install feed dependencies
         run: pip install -r requirements.txt
 
+      - name: Sync to latest main
+        run: |
+          git fetch origin main
+          git checkout main
+          git reset --hard origin/main
+
       - name: Generate live RSS feed
         run: python scripts/generate_feed.py
 
@@ -62,6 +68,5 @@ jobs:
             echo "No feed changes to commit."
           else
             git commit -m "Refresh Your Daily Queue feeds"
-            git pull --rebase origin main
             git push origin HEAD:main
           fi
