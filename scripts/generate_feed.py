@@ -28,20 +28,20 @@ FEEDS: dict[str, list[tuple[str, str]]] = {
     "us": [
         ("NPR", "https://feeds.npr.org/1001/rss.xml"),
         ("BBC US & Canada", "https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml"),
-        ("Reuters", google_news("Reuters US news when:2d")),
-        ("Associated Press", google_news("Associated Press US news when:2d")),
+        ("U.S. News Search", google_news("site:apnews.com (Congress OR White House OR Supreme Court OR election OR economy OR immigration) when:2d")),
+        ("U.S. News Search", google_news("site:reuters.com/world/us (Congress OR White House OR economy OR court OR immigration OR climate) when:2d")),
     ],
     "world": [
         ("BBC World", "https://feeds.bbci.co.uk/news/world/rss.xml"),
-        ("Reuters World", google_news("Reuters world news when:2d")),
-        ("Associated Press World", google_news("Associated Press world news when:2d")),
-        ("NPR World", google_news("site:npr.org world international when:2d")),
+        ("World News Search", google_news("site:reuters.com/world when:2d")),
+        ("World News Search", google_news("site:apnews.com/world-news when:2d")),
+        ("NPR World", google_news("site:npr.org international world when:2d")),
     ],
     "science": [
         ("BBC Science", "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml"),
         ("ScienceDaily", "https://www.sciencedaily.com/rss/top/science.xml"),
         ("Smithsonian", "https://www.smithsonianmag.com/rss/smart-news/"),
-        ("Science", google_news("science research discovery when:3d")),
+        ("Science Search", google_news("science research discovery study when:3d")),
     ],
     "tech": [
         ("MIT Technology Review", "https://www.technologyreview.com/feed/"),
@@ -52,19 +52,19 @@ FEEDS: dict[str, list[tuple[str, str]]] = {
     "animals": [
         ("Smithsonian", "https://www.smithsonianmag.com/rss/smart-news/"),
         ("BBC Science", "https://feeds.bbci.co.uk/news/science_and_environment/rss.xml"),
-        ("Wildlife", google_news("animals wildlife conservation rescue when:4d")),
-        ("Pets", google_news("pets dogs cats animal rescue when:4d")),
+        ("Wildlife Search", google_news("animals wildlife conservation rescue when:4d")),
+        ("Pet Search", google_news("pets dogs cats animal rescue when:4d")),
     ],
     "wellbeing": [
         ("BBC Health", "https://feeds.bbci.co.uk/news/health/rss.xml"),
         ("ScienceDaily Mind & Brain", "https://www.sciencedaily.com/rss/mind_brain.xml"),
         ("NIMH", "https://www.nimh.nih.gov/site-info/index-rss"),
-        ("Psychology", google_news("psychology mental health wellbeing research when:4d")),
+        ("Psychology Search", google_news("psychology mental health wellbeing research when:4d")),
     ],
     "wonderful": [
         ("Good News Network", "https://www.goodnewsnetwork.org/feed/"),
         ("Positive News", "https://www.positive.news/feed/"),
-        ("Wonderful News", google_news("uplifting inspiring community kindness rescue when:5d")),
+        ("Wonderful News Search", google_news("uplifting inspiring community kindness rescue when:5d")),
     ],
     "entertainment": [
         ("Variety", "https://variety.com/feed/"),
@@ -74,15 +74,15 @@ FEEDS: dict[str, list[tuple[str, str]]] = {
     ],
     "markets": [
         ("BBC Business", "https://feeds.bbci.co.uk/news/business/rss.xml"),
-        ("Reuters Markets", google_news("Reuters markets stocks economy when:2d")),
-        ("Associated Press Business", google_news("Associated Press business markets when:2d")),
-        ("Markets", google_news("stocks markets economy investing when:2d")),
+        ("Markets Search", google_news("site:reuters.com/markets (stocks OR markets OR economy OR rates OR earnings) when:2d")),
+        ("Business Search", google_news("site:apnews.com (business OR economy OR markets OR stocks) when:2d")),
+        ("Markets Search", google_news("stocks markets economy interest rates earnings when:2d")),
     ],
     "sports": [
         ("BBC Sport", "https://feeds.bbci.co.uk/sport/rss.xml?edition=uk"),
-        ("Reuters Sports", google_news("Reuters sports when:2d")),
-        ("ESPN", google_news("site:espn.com sports when:2d")),
-        ("Sports", google_news("sports scores highlights when:2d")),
+        ("Sports Search", google_news("site:reuters.com/sports when:2d")),
+        ("ESPN Search", google_news("site:espn.com sports when:2d")),
+        ("Sports Search", google_news("sports scores highlights playoffs championship when:2d")),
     ],
     "local": [
         ("Madison Local", google_news("Madison Wisconsin local news when:3d")),
@@ -96,6 +96,22 @@ ANIMAL_TERMS = {
     "bear", "wolf", "whale", "dolphin", "elephant", "horse", "rabbit", "fox", "otter", "capybara",
     "zoo", "species", "habitat", "conservation", "rescue", "shelter", "marine", "insect", "bee",
     "butterfly", "turtle", "shark", "penguin", "primate", "gorilla", "lion", "tiger", "deer", "moose",
+}
+
+US_CIVIC_TERMS = {
+    "trump", "president", "white house", "congress", "senate", "house", "supreme court", "federal",
+    "governor", "election", "vote", "immigration", "economy", "inflation", "jobs", "health", "education",
+    "climate", "law", "policy", "justice", "court", "police", "wildfire", "hurricane", "public health",
+    "united states", "u.s.", "america", "state department", "pentagon", "department of justice",
+}
+US_SPORTS_TERMS = {
+    "soccer", "football", "basketball", "baseball", "hockey", "tennis", "golf", "nfl", "nba", "mlb",
+    "nhl", "world cup", "champions league", "psg", "barcelona", "arsenal", "liverpool", "playoffs",
+}
+MARKET_TERMS = {
+    "stock", "stocks", "market", "markets", "dow", "nasdaq", "s&p", "economy", "economic", "inflation",
+    "interest rate", "rates", "federal reserve", "fed", "earnings", "investor", "investment", "bond", "bonds",
+    "tariff", "trade", "jobs", "unemployment", "currency", "dollar", "oil", "business", "company", "companies",
 }
 
 
@@ -183,14 +199,33 @@ def title_key(title: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
 
 
+def contains_any(text: str, terms: set[str]) -> bool:
+    lowered = text.lower()
+    return any(term in lowered for term in terms)
+
+
 def topic_accepts(topic: str, headline: str, summary: str) -> bool:
-    if topic != "animals":
-        return True
     haystack = f"{headline} {summary}".lower()
-    return any(re.search(rf"\b{re.escape(term)}s?\b", haystack) for term in ANIMAL_TERMS)
+    if topic == "animals":
+        return any(re.search(rf"\b{re.escape(term)}s?\b", haystack) for term in ANIMAL_TERMS)
+    if topic == "us":
+        if contains_any(haystack, US_SPORTS_TERMS) and not contains_any(haystack, US_CIVIC_TERMS):
+            return False
+        return True
+    if topic == "markets":
+        return contains_any(haystack, MARKET_TERMS)
+    return True
 
 
-def make_candidate(topic: str, source: str, entry: Any) -> dict[str, Any] | None:
+def entry_source(entry: Any, fallback: str, is_google: bool) -> str:
+    if not is_google:
+        return fallback
+    source = entry.get("source") or {}
+    title = source.get("title") if hasattr(source, "get") else ""
+    return clean_text(title, 80) if title else fallback
+
+
+def make_candidate(topic: str, source: str, feed_url: str, feed_rank: int, entry: Any) -> dict[str, Any] | None:
     headline = clean_text(entry.get("title"), 220)
     url = entry.get("link") or ""
     if not headline or not url:
@@ -198,6 +233,8 @@ def make_candidate(topic: str, source: str, entry: Any) -> dict[str, Any] | None
     summary = clean_text(entry.get("summary") or entry.get("description"), 480)
     if not topic_accepts(topic, headline, summary):
         return None
+    is_google = "news.google.com" in urlparse(feed_url).netloc.lower()
+    actual_source = entry_source(entry, source, is_google)
     ts = entry_timestamp(entry)
     published = datetime.fromtimestamp(ts, timezone.utc).isoformat() if ts else ""
     words = max(1, len(re.findall(r"\w+", summary)))
@@ -211,7 +248,7 @@ def make_candidate(topic: str, source: str, entry: Any) -> dict[str, Any] | None
     return {
         "id": story_id(topic, url, headline),
         "topic": topic,
-        "source": source,
+        "source": actual_source,
         "time": time_ago(ts),
         "read": f"{read_minutes} min read",
         "headline": headline,
@@ -222,22 +259,33 @@ def make_candidate(topic: str, source: str, entry: Any) -> dict[str, Any] | None
         "url": url,
         "published": published,
         "_timestamp": ts,
+        "_is_google": is_google,
+        "_feed_rank": feed_rank,
     }
 
 
 def collect_topic(topic: str, feeds: list[tuple[str, str]]) -> list[dict[str, Any]]:
     candidates: list[dict[str, Any]] = []
-    for source, url in feeds:
+    for feed_rank, (source, url) in enumerate(feeds):
         try:
             parsed = feedparser.parse(url, request_headers={"User-Agent": USER_AGENT})
             for entry in (parsed.entries or [])[:18]:
-                candidate = make_candidate(topic, source, entry)
+                candidate = make_candidate(topic, source, url, feed_rank, entry)
                 if candidate:
                     candidates.append(candidate)
         except Exception as exc:
             print(f"Feed failed: {topic} / {source}: {exc}")
 
-    candidates.sort(key=lambda item: item.get("_timestamp", 0), reverse=True)
+    # Direct publisher feeds are preferred because they generally carry cleaner
+    # summaries and real article imagery. Google News fills gaps with fresh breadth.
+    candidates.sort(
+        key=lambda item: (
+            1 if not item.get("_is_google") else 0,
+            -int(item.get("_feed_rank", 0)),
+            item.get("_timestamp", 0),
+        ),
+        reverse=True,
+    )
     chosen: list[dict[str, Any]] = []
     seen_titles: set[str] = set()
     source_counts: dict[str, int] = {}
@@ -280,6 +328,8 @@ def main() -> None:
     fill_missing_images(all_stories)
     for story in all_stories:
         story.pop("_timestamp", None)
+        story.pop("_is_google", None)
+        story.pop("_feed_rank", None)
 
     generated_at = datetime.now(timezone.utc).isoformat()
     payload = {
