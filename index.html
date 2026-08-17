@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Your Daily Queue is a CapyQueue demo: a personalized daily briefing built around the news and information one person actually cares about.">
   <meta name="theme-color" content="#07182d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Your Daily Queue">
+  <link rel="icon" type="image/png" href="/Assets/C3860AA4-392D-422C-AFD6-78723769B642.png?v=20260816">
+  <link rel="apple-touch-icon" href="/Assets/C3860AA4-392D-422C-AFD6-78723769B642.png?v=20260816">
   <meta property="og:title" content="Your Daily Queue | CapyQueue Demo">
   <meta property="og:description" content="Curated stories. On your terms.">
   <title>Your Daily Queue | CapyQueue Demo</title>
@@ -47,212 +52,23 @@
       <main id="app-main" tabindex="-1">
         <section class="view is-active" id="view-today" data-view="today" aria-labelledby="today-title">
           <div class="view-inner today-view">
-            <div class="welcome-row">
-              <div>
-                <p class="eyebrow" id="today-date">Today</p>
-                <h1 id="today-title">Good morning, <span id="today-name">Alex</span>.</h1>
-                <p>Here’s what deserves your attention.</p>
-              </div>
-              <button class="location-pill" type="button" data-view-link="settings">
-                <img src="25-location-zip.svg" alt="">
-                <span id="today-location">Madison, WI</span>
-              </button>
-            </div>
-
-            <section class="weather-glance" id="weather-glance" aria-labelledby="weather-glance-title">
-              <div class="weather-glance-bg" id="weather-glance-bg"></div>
-              <div class="weather-glance-content">
-                <div class="weather-glance-top">
-                  <div>
-                    <p class="eyebrow">Weather</p>
-                    <h2 id="weather-glance-title"><span id="weather-temp">--°</span> <small id="weather-condition">Loading forecast…</small></h2>
-                    <p id="weather-quill-read">Quill is checking what your day is walking into.</p>
-                  </div>
-                  <button class="round-arrow" type="button" data-queue-topic="weather" aria-label="Open full weather">→</button>
-                </div>
-                <div class="weather-metrics" id="weather-mini-metrics">
-                  <span>Feels <strong>--°</strong></span>
-                  <span>Rain <strong>--%</strong></span>
-                  <span>Wind <strong>--</strong></span>
-                  <span>Air <strong>--</strong></span>
-                </div>
-              </div>
-            </section>
-
-            <section class="today-block" aria-labelledby="top-story-title">
-              <div class="section-row">
-                <div><p class="eyebrow">Start here</p><h2 id="top-story-title">Top Story</h2></div>
-                <button class="text-button" type="button" data-view-link="queue">My Queue →</button>
-              </div>
-              <div id="top-story-card"></div>
-            </section>
-
-            <section class="today-block" aria-labelledby="quick-scan-title">
-              <div class="section-row">
-                <div><p class="eyebrow">One-minute overview</p><h2 id="quick-scan-title">Quick Scan</h2></div>
-              </div>
-              <div class="quick-strip" id="quick-strip"></div>
-            </section>
-
-            <section class="today-block" aria-labelledby="more-for-you-title">
-              <div class="section-row">
-                <div><p class="eyebrow">Built around you</p><h2 id="more-for-you-title">More for You</h2></div>
-                <button class="text-button" type="button" data-view-link="topics">Edit topics</button>
-              </div>
-              <div class="story-scroller" id="more-for-you"></div>
-            </section>
-
-            <section class="quill-card">
-              <img src="Meet Quill.png" alt="Meet Quill, the Your Daily Queue owl guide">
-            </section>
+            <div class="welcome-row"><div><p class="eyebrow" id="today-date">Today</p><h1 id="today-title">Good morning, <span id="today-name">Alex</span>.</h1><p>Here’s what deserves your attention.</p></div><button class="location-pill" type="button" data-view-link="settings"><img src="25-location-zip.svg" alt=""><span id="today-location">Madison, WI</span></button></div>
+            <section class="weather-glance" id="weather-glance" aria-labelledby="weather-glance-title"><div class="weather-glance-bg" id="weather-glance-bg"></div><div class="weather-glance-content"><div class="weather-glance-top"><div><p class="eyebrow">Weather</p><h2 id="weather-glance-title"><span id="weather-temp">--°</span> <small id="weather-condition">Loading forecast…</small></h2><p id="weather-quill-read">Quill is checking what your day is walking into.</p></div><button class="round-arrow" type="button" data-queue-topic="weather" aria-label="Open full weather">→</button></div><div class="weather-metrics" id="weather-mini-metrics"><span>Feels <strong>--°</strong></span><span>Rain <strong>--%</strong></span><span>Wind <strong>--</strong></span><span>Air <strong>--</strong></span></div></div></section>
+            <section class="today-block" aria-labelledby="top-story-title"><div class="section-row"><div><p class="eyebrow">Start here</p><h2 id="top-story-title">Top Story</h2></div><button class="text-button" type="button" data-view-link="queue">My Queue →</button></div><div id="top-story-card"></div></section>
+            <section class="today-block" aria-labelledby="quick-scan-title"><div class="section-row"><div><p class="eyebrow">One-minute overview</p><h2 id="quick-scan-title">Quick Scan</h2></div></div><div class="quick-strip" id="quick-strip"></div></section>
+            <section class="today-block" aria-labelledby="more-for-you-title"><div class="section-row"><div><p class="eyebrow">Built around you</p><h2 id="more-for-you-title">More for You</h2></div><button class="text-button" type="button" data-view-link="topics">Edit topics</button></div><div class="story-scroller" id="more-for-you"></div></section>
+            <section class="quill-card"><img src="Meet Quill.png" alt="Meet Quill, the Your Daily Queue owl guide"></section>
           </div>
         </section>
-
-        <section class="view" id="view-queue" data-view="queue" aria-labelledby="queue-title">
-          <div class="view-inner">
-            <div class="page-heading">
-              <p class="eyebrow">Your briefing</p>
-              <h1 id="queue-title">My Queue</h1>
-              <p>Weather first. Then the topics you picked, in one place.</p>
-            </div>
-            <div class="queue-tabs-wrap">
-              <div class="queue-tabs" id="queue-tabs" role="tablist" aria-label="Queue sections"></div>
-            </div>
-            <div id="queue-panel"></div>
-          </div>
-        </section>
-
-        <section class="view" id="view-topics" data-view="topics" aria-labelledby="topics-title">
-          <div class="view-inner">
-            <div class="page-heading">
-              <p class="eyebrow">Make it yours</p>
-              <h1 id="topics-title">Choose Your Queue</h1>
-              <p>Pick the topics you care about. Your choices become the tabs in My Queue.</p>
-            </div>
-            <div class="topic-picker-grid" id="topic-picker-grid"></div>
-            <div class="sticky-save-bar">
-              <span id="topic-count">0 topics selected</span>
-              <button class="primary-button" id="save-topics" type="button">Save my queue</button>
-            </div>
-          </div>
-        </section>
-
-        <section class="view" id="view-saved" data-view="saved" aria-labelledby="saved-title">
-          <div class="view-inner">
-            <div class="page-heading">
-              <p class="eyebrow">Read later</p>
-              <h1 id="saved-title">Saved</h1>
-              <p>For the stories you genuinely mean to come back to.</p>
-            </div>
-            <div id="saved-list" class="saved-list"></div>
-          </div>
-        </section>
-
-        <section class="view" id="view-settings" data-view="settings" aria-labelledby="settings-title">
-          <div class="view-inner settings-view">
-            <div class="page-heading">
-              <p class="eyebrow">Control room</p>
-              <h1 id="settings-title">Settings</h1>
-              <p>Tell the Queue how you like information delivered.</p>
-            </div>
-
-            <form class="settings-card" id="settings-form">
-              <div class="settings-section">
-                <div class="settings-section-head">
-                  <span class="settings-number">01</span>
-                  <div><h2>Profile</h2><p>This demo saves preferences only in this browser.</p></div>
-                </div>
-                <label class="field-label" for="reader-name">Your name</label>
-                <input class="field-input" id="reader-name" name="reader-name" maxlength="24" autocomplete="name">
-              </div>
-
-              <div class="settings-section">
-                <div class="settings-section-head">
-                  <span class="settings-number">02</span>
-                  <div><h2>Home base</h2><p>One location powers Weather and Local News.</p></div>
-                </div>
-                <label class="field-label" for="location-input">ZIP / postal code or city</label>
-                <div class="location-input-row">
-                  <input class="field-input" id="location-input" name="location-input" placeholder="53703 or Madison, WI" autocomplete="postal-code">
-                  <button class="secondary-button" id="use-location" type="button"><img src="25-location-zip.svg" alt=""> Use my location</button>
-                </div>
-                <p class="field-help" id="location-status">Enter a city or postal code. We’ll resolve it to the forecast location.</p>
-              </div>
-
-              <div class="settings-section">
-                <div class="settings-section-head">
-                  <span class="settings-number">03</span>
-                  <div><h2>My topics</h2><p>Choose which news categories become tabs in My Queue. Weather stays pinned first.</p></div>
-                </div>
-                <div class="settings-topic-control">
-                  <p>Add or remove U.S. News, World News, Science, Tech & Innovation, Animals & Nature, Wellbeing, Wonderful News, Entertainment, Stocks & Markets, Sports, and Local News whenever you want.</p>
-                  <button class="secondary-button" type="button" data-view-link="topics">Manage topics →</button>
-                </div>
-              </div>
-
-              <div class="settings-section">
-                <div class="settings-section-head">
-                  <span class="settings-number">04</span>
-                  <div><h2>Reading depth</h2><p>Same stories, different amount of context.</p></div>
-                </div>
-                <div class="depth-grid" id="depth-grid">
-                  <label class="depth-choice">
-                    <input type="radio" name="depth" value="quick">
-                    <img src="Quick Scan Personalization Icon.png" alt="">
-                    <span><strong>Quick Scan</strong><small>Headlines + the point.</small></span>
-                  </label>
-                  <label class="depth-choice">
-                    <input type="radio" name="depth" value="balanced">
-                    <img src="Balenced Personalization Icon.png" alt="">
-                    <span><strong>Balanced</strong><small>Enough context to understand why it matters.</small></span>
-                  </label>
-                  <label class="depth-choice">
-                    <input type="radio" name="depth" value="deep">
-                    <img src="Deep Dive Personalization Icon.png" alt="">
-                    <span><strong>Deep Dive</strong><small>More background, nuance, and what to watch next.</small></span>
-                  </label>
-                </div>
-              </div>
-
-              <div class="settings-section">
-                <div class="settings-section-head">
-                  <span class="settings-number">05</span>
-                  <div><h2>Temperature</h2><p>Use whichever scale makes your brain happiest.</p></div>
-                </div>
-                <div class="segmented">
-                  <label><input type="radio" name="units" value="fahrenheit"><span>°F</span></label>
-                  <label><input type="radio" name="units" value="celsius"><span>°C</span></label>
-                </div>
-              </div>
-
-              <div class="settings-actions">
-                <button class="secondary-button danger-lite" id="reset-demo" type="button">Reset demo</button>
-                <button class="primary-button" type="submit">Save settings</button>
-              </div>
-            </form>
-
-            <section class="settings-quill">
-              <img src="Meet Quill.png" alt="Meet Quill, your guide through the noise">
-            </section>
-          </div>
-        </section>
+        <section class="view" id="view-queue" data-view="queue" aria-labelledby="queue-title"><div class="view-inner"><div class="page-heading"><p class="eyebrow">Your briefing</p><h1 id="queue-title">My Queue</h1><p>Weather first. Then the topics you picked, in one place.</p></div><div class="queue-tabs-wrap"><div class="queue-tabs" id="queue-tabs" role="tablist" aria-label="Queue sections"></div></div><div id="queue-panel"></div></div></section>
+        <section class="view" id="view-topics" data-view="topics" aria-labelledby="topics-title"><div class="view-inner"><div class="page-heading"><p class="eyebrow">Make it yours</p><h1 id="topics-title">Choose Your Queue</h1><p>Pick the topics you care about. Your choices become the tabs in My Queue.</p></div><div class="topic-picker-grid" id="topic-picker-grid"></div><div class="sticky-save-bar"><span id="topic-count">0 topics selected</span><button class="primary-button" id="save-topics" type="button">Save my queue</button></div></div></section>
+        <section class="view" id="view-saved" data-view="saved" aria-labelledby="saved-title"><div class="view-inner"><div class="page-heading"><p class="eyebrow">Read later</p><h1 id="saved-title">Saved</h1><p>For the stories you genuinely mean to come back to.</p></div><div id="saved-list" class="saved-list"></div></div></section>
+        <section class="view" id="view-settings" data-view="settings" aria-labelledby="settings-title"><div class="view-inner settings-view"><div class="page-heading"><p class="eyebrow">Control room</p><h1 id="settings-title">Settings</h1><p>Tell the Queue how you like information delivered.</p></div><form class="settings-card" id="settings-form"><div class="settings-section"><div class="settings-section-head"><span class="settings-number">01</span><div><h2>Profile</h2><p>This demo saves preferences only in this browser.</p></div></div><label class="field-label" for="reader-name">Your name</label><input class="field-input" id="reader-name" name="reader-name" maxlength="24" autocomplete="name"></div><div class="settings-section"><div class="settings-section-head"><span class="settings-number">02</span><div><h2>Home base</h2><p>One location powers Weather and Local News.</p></div></div><label class="field-label" for="location-input">ZIP / postal code or city</label><div class="location-input-row"><input class="field-input" id="location-input" name="location-input" placeholder="53703 or Madison, WI" autocomplete="postal-code"><button class="secondary-button" id="use-location" type="button"><img src="25-location-zip.svg" alt=""> Use my location</button></div><p class="field-help" id="location-status">Enter a city or postal code. We’ll resolve it to the forecast location.</p></div><div class="settings-section"><div class="settings-section-head"><span class="settings-number">03</span><div><h2>My topics</h2><p>Choose which news categories become tabs in My Queue. Weather stays pinned first.</p></div></div><div class="settings-topic-control"><p>Add or remove U.S. News, World News, Science, Tech & Innovation, Animals & Nature, Wellbeing, Wonderful News, Entertainment, Stocks & Markets, Sports, and Local News whenever you want.</p><button class="secondary-button" type="button" data-view-link="topics">Manage topics →</button></div></div><div class="settings-section"><div class="settings-section-head"><span class="settings-number">04</span><div><h2>Reading depth</h2><p>Same stories, different amount of context.</p></div></div><div class="depth-grid" id="depth-grid"><label class="depth-choice"><input type="radio" name="depth" value="quick"><img src="Quick Scan Personalization Icon.png" alt=""><span><strong>Quick Scan</strong><small>Headlines + the point.</small></span></label><label class="depth-choice"><input type="radio" name="depth" value="balanced"><img src="Balenced Personalization Icon.png" alt=""><span><strong>Balanced</strong><small>Enough context to understand why it matters.</small></span></label><label class="depth-choice"><input type="radio" name="depth" value="deep"><img src="Deep Dive Personalization Icon.png" alt=""><span><strong>Deep Dive</strong><small>More background, nuance, and what to watch next.</small></span></label></div></div><div class="settings-section"><div class="settings-section-head"><span class="settings-number">05</span><div><h2>Temperature</h2><p>Use whichever scale makes your brain happiest.</p></div></div><div class="segmented"><label><input type="radio" name="units" value="fahrenheit"><span>°F</span></label><label><input type="radio" name="units" value="celsius"><span>°C</span></label></div></div><div class="settings-actions"><button class="secondary-button danger-lite" id="reset-demo" type="button">Reset demo</button><button class="primary-button" type="submit">Save settings</button></div></form><section class="settings-quill"><img src="Meet Quill.png" alt="Meet Quill, your guide through the noise"></section></div></section>
       </main>
-
       <nav class="mobile-nav" id="mobile-nav" aria-label="Primary navigation"></nav>
     </div>
   </div>
-
-  <dialog class="search-dialog" id="search-dialog">
-    <form method="dialog" class="search-panel">
-      <div class="dialog-top">
-        <div><p class="eyebrow">Search</p><h2>Search Your Queue</h2></div>
-        <button value="cancel" class="icon-button close-dialog" aria-label="Close"><img src="28-close-x.svg" alt=""></button>
-      </div>
-      <input class="field-input" id="search-input" placeholder="Search stories or topics…" autofocus>
-      <div id="search-results" class="search-results"></div>
-    </form>
-  </dialog>
-
+  <dialog class="search-dialog" id="search-dialog"><form method="dialog" class="search-panel"><div class="dialog-top"><div><p class="eyebrow">Search</p><h2>Search Your Queue</h2></div><button value="cancel" class="icon-button close-dialog" aria-label="Close"><img src="28-close-x.svg" alt=""></button></div><input class="field-input" id="search-input" placeholder="Search stories or topics…" autofocus><div id="search-results" class="search-results"></div></form></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
